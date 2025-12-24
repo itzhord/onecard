@@ -85,7 +85,6 @@ export default function AuthContent() {
 
             {mode === 'reset' && (
               <PasswordResetForm
-                onSuccess={handleSuccess}
                 switchToSignIn={switchToSignIn}
               />
             )}

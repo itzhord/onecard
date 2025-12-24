@@ -116,7 +116,6 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }) {
 
                     {mode === 'reset' && (
                       <PasswordResetForm
-                        onSuccess={handleSuccess}
                         switchToSignIn={switchToSignIn}
                       />
                     )}
