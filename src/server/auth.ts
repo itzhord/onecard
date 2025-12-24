@@ -33,7 +33,12 @@ function logDevUrl(type: 'verification' | 'password-reset', email: string, url: 
 }
 
 export const auth = betterAuth({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL2  || "http://localhost:3000",
+  trustedOrigins: [
+    process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL2   || "http://localhost:3000",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000 (http://127.0.0.1:3000/)"
+  ],
   secret: process.env.BETTER_AUTH_SECRET || process.env.AUTH_SECRET,
   database: prismaAdapter(prisma, {
     provider: "postgresql",
@@ -150,6 +155,7 @@ export const auth = betterAuth({
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      redirectURI: `${process.env.NEXT_PUBLIC_BASE_URL  || process.env.NEXT_PUBLIC_BASE_URL2  || "http://localhost:3000"}/api/auth/callback/google`,
     },
   },
 
